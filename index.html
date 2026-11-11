@@ -1,0 +1,398 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style></head><body><title>Financial Analysis: On Holding AG · Guilhem Bernard</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="author" content="Guilhem Bernard">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: Swiss spec sheet. Left-aligned, asymmetric screens, one finding per screen, one black block (method). Single light look by design (charte GB v1.1). */
+:root{
+  --ink:#111111; --ink-2:#3A3A3C; --graphite:#66666A; --silver:#C7C7CC; --line:#E5E5EA; --white:#FFFFFF;
+  --lime:#D9F24B; --red:#D70015;
+  --sans:'Inter Tight', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+  --mono:'JetBrains Mono', ui-monospace, Consolas, 'Courier New', monospace;
+  --sh1:0 1px 2px rgba(17,17,17,.06), 0 8px 24px rgba(17,17,17,.09);
+  --sh2:0 2px 4px rgba(17,17,17,.06), 0 24px 56px rgba(17,17,17,.15);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--white);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.5;font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--white)}
+a{color:var(--ink)}
+a:hover{color:var(--graphite)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:6px}
+h1,h2,h3,p{margin:0}
+h2{font-size:clamp(32px,4.4vw,49px);line-height:1.04;letter-spacing:-.035em;font-weight:700;text-wrap:balance}
+.wrap{max-width:1280px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--graphite);font-weight:400}
+.label.sm{font-size:10px}
+.muted{color:var(--graphite)}
+.body{font-size:18px;line-height:1.5;color:var(--ink-2);max-width:60ch}
+.gb{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:9px;background:linear-gradient(180deg,#3A3A3C 0%,#111111 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.22);color:#fff;font-size:12px;font-weight:700;letter-spacing:-.02em;flex:none}
+.card{background:var(--white);border-radius:24px;box-shadow:var(--sh1)}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;font:600 16px/1 var(--sans);text-decoration:none;border:0;cursor:pointer;transition:opacity .16s ease, background-color .2s ease}
+.btn:hover{opacity:.86;color:inherit}
+.btn.dark{background:var(--ink);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.16)}
+.btn.dark:hover{color:#fff}
+.btn.line{background:var(--white);color:var(--ink);box-shadow:inset 0 0 0 1px #D1D1D6}
+.btn.link{background:none;padding:0 6px;text-decoration:underline;text-underline-offset:4px;color:var(--ink)}
+/* nav */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:rgba(255,255,255,.86);backdrop-filter:saturate(180%) blur(16px);-webkit-backdrop-filter:saturate(180%) blur(16px);border-bottom:1px solid transparent}
+nav .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;padding-block:14px}
+.brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;min-height:44px;font-weight:600;font-size:15px}
+.navlinks{display:flex;flex-wrap:wrap;gap:6px 22px}
+.navlinks a{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--graphite);text-decoration:none;min-height:32px;display:inline-flex;align-items:center}
+.navlinks a:hover{color:var(--ink)}
+/* hero */
+header.hero{display:flex;flex-wrap:wrap;gap:48px;align-items:flex-end;padding-block:64px 56px}
+.hero-main{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:22px}
+.hero h1{font-size:clamp(52px,8.4vw,104px);line-height:.92;font-weight:700;letter-spacing:-.045em}
+.hero .sub{font-size:clamp(22px,2.6vw,31px);line-height:1.15;font-weight:500;letter-spacing:-.02em;color:var(--graphite)}
+.hero .thesis{font-size:20px;line-height:1.5;max-width:600px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding-top:6px}
+aside.keydata{flex:1 1 320px;min-width:0;border-radius:24px;padding:24px 26px 16px;box-shadow:var(--sh2);background:var(--white)}
+.kd{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:15px}
+.kd span{color:var(--graphite)}
+.kd b{font-weight:600;text-align:right}
+.chip{background:var(--lime);border-radius:8px;padding:2px 10px;font-weight:600}
+/* kpis */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
+.kpi{border-radius:14px;padding:22px 22px 24px;display:flex;flex-direction:column;gap:8px}
+.kpi b{font-size:clamp(38px,4vw,49px);font-weight:700;letter-spacing:-.04em;line-height:1}
+.kpi span:last-child{font-size:15px;color:var(--graphite)}
+.kpi.accent{background:var(--lime);box-shadow:0 1px 2px rgba(17,17,17,.08), 0 8px 24px rgba(17,17,17,.12)}
+.kpi.accent .label,.kpi.accent span:last-child{color:var(--ink)}
+/* screens */
+.screen{display:flex;flex-wrap:wrap;gap:56px;align-items:center;padding-block:112px 0}
+.screen.rev{flex-wrap:wrap-reverse}
+.screen .txt{flex:1 1 360px;min-width:0;display:flex;flex-direction:column;gap:16px}
+.screen figure{flex:1 1 460px;min-width:0;margin:0;padding:30px 30px 22px;display:flex;flex-direction:column;gap:16px}
+figcaption{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--graphite);border-top:1px solid var(--line);padding-top:12px;line-height:1.6}
+.hbar{display:grid;grid-template-columns:76px minmax(0,1fr);align-items:center;gap:12px}
+.hbar .n{font-size:14px;color:var(--graphite)}
+.hbar.on .n{color:var(--ink);font-weight:600}
+.track{display:flex;align-items:center;gap:10px;min-width:0}
+.bar{height:28px;border-radius:6px;background:var(--silver);flex:none;transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.hbar.on .bar{background:var(--ink)}
+.track b{font-size:16px;font-weight:600;color:var(--ink-2)}
+.hbar.on .track b{font-weight:700;color:var(--ink)}
+.pair{display:flex;flex-direction:column;gap:6px;min-width:0}
+.pair .bar{height:20px}
+.pair .bar.ebit{background:var(--graphite)}
+.hbar.on .pair .bar.gross{background:var(--silver)}
+.hbar.on .pair .bar.ebit{background:var(--ink)}
+.pair .track b{font-size:14px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:14px;color:var(--graphite)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+/* promises */
+.promises{padding-block:112px 0;display:flex;flex-direction:column;gap:28px}
+.promises .head{display:flex;flex-wrap:wrap;gap:24px 40px;align-items:flex-end;justify-content:space-between}
+.promises .head > div{flex:1 1 520px;min-width:0;display:flex;flex-direction:column;gap:16px}
+.promises .head p{flex:1 1 360px;min-width:0}
+.prow{display:flex;flex-wrap:wrap;gap:18px}
+.sqcard{flex:2 1 460px;min-width:0;padding:28px 30px;display:flex;flex-direction:column;gap:18px}
+.squares{display:grid;grid-template-columns:repeat(11,minmax(0,1fr));gap:8px}
+.squares i{aspect-ratio:1;border-radius:8px;background:var(--ink);max-width:100%}
+.squares i.m{background:var(--silver)}
+.stat{flex:1 1 220px;min-width:0;padding:28px;display:flex;flex-direction:column;gap:8px}
+.stat b{font-size:clamp(38px,4vw,49px);font-weight:700;letter-spacing:-.04em;line-height:1}
+.stat span:last-child{font-size:15px;color:var(--graphite)}
+/* scenario chart */
+.scen{display:flex;flex-wrap:wrap;gap:8px}
+.scen button{min-height:44px;padding:0 18px;border-radius:999px;border:0;cursor:pointer;font:600 15px/1 var(--sans);background:var(--white);color:var(--ink);box-shadow:inset 0 0 0 1px #D1D1D6;transition:background-color .2s ease,color .2s ease}
+.scen button[aria-pressed="true"]{background:var(--ink);color:#fff;box-shadow:none}
+.vbars{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;align-items:end;height:240px;border-bottom:1px solid var(--silver)}
+.vb{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;height:100%}
+.vb span{font-size:14px;font-weight:600}
+.vb div{width:100%;border-radius:8px 8px 2px 2px;background:var(--ink);transition:height .3s ease}
+.vb.a div{background:var(--silver)}
+.vb.last div{background:var(--lime);box-shadow:inset 0 0 0 1.5px var(--ink)}
+.vlab{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;text-align:center}
+.big-last{display:flex;justify-content:space-between;align-items:flex-end;gap:16px}
+.big-last b{font-size:39px;font-weight:700;letter-spacing:-.035em;line-height:1;display:block;text-align:right}
+/* deliverables */
+.work{padding-block:112px 0;display:flex;flex-direction:column}
+.wrow{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding:26px 0;border-top:1px solid var(--line)}
+.wrow:first-of-type{border-top:1px solid var(--ink)}
+.wrow:last-child{border-bottom:1px solid var(--line)}
+.wrow > div:first-child{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:4px}
+.wrow h3{font-size:31px;font-weight:700;letter-spacing:-.03em}
+.wrow .acts{display:flex;flex-wrap:wrap;gap:10px}
+.status{font-size:14px;color:var(--graphite);min-height:20px}
+/* method block */
+.method{margin-top:112px;background:var(--ink);color:#fff;border-radius:24px;padding:clamp(28px,5vw,56px);box-shadow:inset 0 1px 0 rgba(255,255,255,.12);display:flex;flex-direction:column;gap:40px}
+.method .top{display:flex;flex-wrap:wrap;gap:32px 40px;justify-content:space-between;align-items:flex-end}
+.method .top > div:first-child{flex:1 1 520px;min-width:0;display:flex;flex-direction:column;gap:14px}
+.method .label.lime{color:var(--lime)}
+.method .nums{display:flex;flex-wrap:wrap;gap:32px 40px}
+.method .nums div{display:flex;flex-direction:column}
+.method .nums b{font-size:49px;font-weight:700;letter-spacing:-.04em;line-height:1}
+.method .nums span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.64)}
+.method .cols{display:flex;flex-wrap:wrap;gap:32px 40px;border-top:1px solid rgba(255,255,255,.16);padding-top:28px}
+.method .cols > div{flex:1 1 280px;min-width:0;display:flex;flex-direction:column;gap:10px}
+.method .cols .label{color:rgba(255,255,255,.64)}
+.method .cols p{font-size:17px;line-height:1.5;color:rgba(255,255,255,.86)}
+/* about + footer */
+.about{padding-block:96px 72px;display:flex;flex-wrap:wrap;gap:32px 40px;align-items:flex-start}
+.contact{display:flex;flex-wrap:wrap;gap:12px 24px;font-size:16px;font-weight:600}
+.contact span{user-select:all}
+footer a{color:inherit;text-decoration:underline;text-underline-offset:2px}footer{padding-block:22px 40px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--graphite)}
+.src-note{font-size:13px;color:var(--graphite);line-height:1.6;max-width:90ch}
+@keyframes rise{from{opacity:.001;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hero > *{animation:rise .8s cubic-bezier(.2,.7,.2,1) both}
+.hero > *:nth-child(2){animation-delay:.12s}
+@media (prefers-reduced-motion: reduce){.reveal,.hero > *{animation:none}.bar,.vb div,.btn{transition:none}}
+@media (max-width:560px){.navlinks{display:none}.screen,.promises,.work{padding-block:72px 0}.method{margin-top:72px}.squares{gap:4px}.squares i{border-radius:4px}}
+
+/* readability pass (review of 5 Nov 2026) */
+.label{font-size:13px;letter-spacing:.12em;color:#4A4A4E;font-weight:500}
+.label.sm{font-size:12.5px}
+.navlinks{gap:4px}
+.navlinks a{font-family:var(--sans);font-size:15.5px;letter-spacing:-.005em;text-transform:none;color:var(--ink-2);font-weight:500;padding:0 14px;min-height:40px;border-radius:999px;transition:background-color .2s ease}
+.navlinks a:hover{background:#F2F2F4;color:var(--ink)}
+.navlinks a.cta{background:var(--ink);color:#fff}
+.navlinks a.cta:hover{background:var(--ink);color:#fff;opacity:.86}
+.brand{font-size:16px}
+.kd{font-size:16px}.kd span{color:var(--ink-2)}
+.kpi span:last-child,.stat span:last-child{font-size:16.5px;line-height:1.4;color:var(--ink-2)}
+figcaption{font-size:11.5px;color:#4A4A4E}
+.hbar{grid-template-columns:84px minmax(0,1fr)}
+.hbar .n{font-size:16px;color:var(--ink-2)}
+.track b{font-size:17px}
+.pair .track b{font-size:15.5px}
+.legend{font-size:15.5px;color:var(--ink-2)}
+.src-note{font-size:15.5px;color:var(--ink-2)}
+.muted{color:var(--ink-2)}
+.wrow .muted{font-size:17px}
+.status{font-size:15px;color:var(--ink-2)}
+.method .nums span{font-size:12px}
+.method .cols .label{color:rgba(255,255,255,.8)}
+.vlab{font-size:12.5px}
+/* contact block */
+.about{padding-block:96px 72px;display:block}
+.about-card{flex-direction:row;border-radius:28px;box-shadow:var(--sh2);background:var(--white);padding:clamp(28px,5vw,56px);display:flex;flex-wrap:wrap;gap:32px 48px;align-items:flex-start}
+.about-card .gb{display:inline-flex;width:72px;height:72px;border-radius:20px;font-size:26px}
+.about-card .who{flex:1 1 480px;min-width:0;display:flex;flex-direction:column;gap:14px}
+.about-card h2{font-size:clamp(30px,3.6vw,42px)}
+.about-card p{font-size:clamp(18px,1.8vw,21px);line-height:1.45;color:var(--ink-2);max-width:56ch}
+.contacts{flex:1 1 100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;padding-top:8px}
+.contact-btn{display:flex;flex-direction:column;gap:6px;padding:22px 24px;border-radius:18px;text-decoration:none;color:var(--ink);background:var(--white);box-shadow:inset 0 0 0 1.5px #D1D1D6;transition:background-color .2s ease, box-shadow .2s ease, transform .2s ease}
+.contact-btn:hover{color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--ink);transform:translateY(-2px)}
+.contact-btn.primary{background:var(--ink);color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.16)}
+.contact-btn.primary:hover{color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.16)}
+.contact-btn .label{color:inherit;opacity:.72}
+.contact-btn b{font-size:22px;letter-spacing:-.02em;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.contact-btn b span{font-size:22px;transition:transform .2s ease}
+.contact-btn:hover b span{transform:translateX(4px)}
+@media (prefers-reduced-motion: reduce){.contact-btn,.contact-btn b span{transition:none}.contact-btn:hover{transform:none}}
+</style>
+
+<nav aria-label="Sections"><div class="wrap">
+  <a class="brand" href="#about"><span class="gb">GB</span>Guilhem Bernard</a>
+  <div class="navlinks">
+    <a href="#growth">Growth</a><a href="#margins">Margins</a><a href="#promises">Guidance</a><a href="#outlook">Outlook</a><a href="#work">The work</a><a class="cta" href="#about">Contact</a>
+  </div>
+</div></nav>
+
+<main class="wrap">
+  <header id="top" class="hero">
+    <div class="hero-main">
+      <span class="label">NYSE: ONON · Footwear and sportswear</span>
+      <h1>Financial Analysis</h1>
+      <p class="sub">On Holding AG</p>
+      <p class="thesis">Management has met or beaten all 11 of its annual targets since 2022. Its 2029 margin plan depends on the one thing it has not proven yet: costs growing slower than sales. I give it half credit.</p>
+      <div class="ctas">
+        <a class="btn dark" href="note.html">Read the note</a>
+        <a class="btn line" href="deck.html">View the deck</a>
+        <a class="btn link" href="files/On_Holding_Financial_Model.xlsx" download data-dl="model" id="dl-model-hero">Download the model</a>
+      </div>
+      <p class="status" id="status-hero" aria-live="polite"></p>
+    </div>
+    <aside class="keydata" aria-label="Key data">
+      <span class="label" style="display:block;padding-bottom:8px">Key data</span>
+      <div class="kd"><span>Ticker</span><b>NYSE: ONON</b></div>
+      <div class="kd"><span>Sector</span><b>Footwear and sportswear</b></div>
+      <div class="kd"><span>Data as of</span><b>22 Sep 2026</b></div>
+      <div class="kd"><span>Net sales FY2025</span><b>CHF 3,014.0m</b></div>
+      <div class="kd"><span>Adj. EBITDA margin FY2025</span><b>18.8%</b></div>
+      <div class="kd"><span>EV / EBIT, FY2026 guidance</span><b>14.4x</b></div>
+      <div class="kd" style="align-items:center"><span>Credibility verdict</span><b class="chip">Prudent</b></div>
+    </aside>
+  </header>
+
+  <section class="kpis" aria-label="Five numbers">
+    <div class="card kpi"><span class="label sm">Growth FY2025, cc</span><b>35.6%</b><span>vs 19.4% Asics, 9.0% Deckers</span></div>
+    <div class="card kpi"><span class="label sm">Targets met or beaten</span><b>11 / 11</b><span>Annual targets, FY2022–FY2025</span></div>
+    <div class="kpi accent"><span class="label sm">SG&amp;A / net sales FY2025</span><b>50.3%</b><span>The number the thesis hangs on</span></div>
+    <div class="card kpi"><span class="label sm">Adj. EBITDA margin 2029</span><b>20.9%</b><span>My central case, vs 22%+ target</span></div>
+  </section>
+
+  <section id="growth" class="screen reveal">
+    <div class="txt">
+      <span class="label">01 · Growth</span>
+      <h2>Sales growth compared with peers</h2>
+      <p class="body">At constant currency in FY2025, On grew almost twice as fast as Asics and four times as fast as Deckers. Asia-Pacific (+106.7%) and direct sales (+39.9%) led. The strong franc took 5.6 points off reported growth, which was 30.0%.</p>
+    </div>
+    <figure class="card" role="img" aria-label="Net sales growth at constant currency, FY2025: On 35.6%, Asics 19.4%, Deckers 9.0%">
+      <span class="label sm">Net sales growth, constant currency, FY2025, %</span>
+      <div class="hbar on"><span class="n">On</span><div class="track"><div class="bar" style="width:80%"></div><b>35.6</b></div></div>
+      <div class="hbar"><span class="n">Asics</span><div class="track"><div class="bar" style="width:43.6%"></div><b>19.4</b></div></div>
+      <div class="hbar"><span class="n">Deckers</span><div class="track"><div class="bar" style="width:20.2%"></div><b>9.0</b></div></div>
+      <figcaption>On 20-F FY2025, Item 5.A · Asics Summary FY2025, p. 6 · Deckers 10-K FY2026 (year to March 2026), p. 37</figcaption>
+    </figure>
+  </section>
+
+  <section id="margins" class="screen rev reveal">
+    <figure class="card" role="img" aria-label="FY2025 gross margin and EBIT margin: On 62.8% and 12.5%, Asics 56.8% and 17.6%, Deckers 57.7% and 23.1%">
+      <span class="label sm">Gross margin and EBIT margin, FY2025, %</span>
+      <div class="hbar on"><span class="n">On</span><div class="pair"><div class="track"><div class="bar gross" style="width:76%"></div><b>62.8</b></div><div class="track"><div class="bar ebit" style="width:15.1%"></div><b>12.5</b></div></div></div>
+      <div class="hbar"><span class="n">Asics</span><div class="pair"><div class="track"><div class="bar gross" style="width:68.8%"></div><b>56.8</b></div><div class="track"><div class="bar ebit" style="width:21.3%"></div><b>17.6</b></div></div></div>
+      <div class="hbar"><span class="n">Deckers</span><div class="pair"><div class="track"><div class="bar gross" style="width:69.9%"></div><b>57.7</b></div><div class="track"><div class="bar ebit" style="width:28%"></div><b>23.1</b></div></div></div>
+      <div class="legend"><span><i style="background:var(--silver)"></i>Gross margin</span><span><i style="background:var(--ink)"></i>EBIT margin</span><span>Gap = SG&amp;A: On 50.3, Asics 39.2, Deckers 34.6</span></div>
+      <figcaption>On 20-F FY2025, p. F-4 · Deckers 10-K FY2026, p. F-6 · Asics Summary FY2025, p. 14</figcaption>
+    </figure>
+    <div class="txt">
+      <span class="label">02 · Margins</span>
+      <h2>Margins compared with peers</h2>
+      <p class="body">On has the best gross margin of the three and the thinnest operating margin, because half of its sales go to SG&amp;A. SG&amp;A rose from 49.1% of sales in FY2022 to 50.3% in FY2025. Asics shows the leverage exists: its SG&amp;A fell from 42.5% to 39.2% in two years.</p>
+    </div>
+  </section>
+
+  <section id="promises" class="promises reveal">
+    <div class="head">
+      <div>
+        <span class="label">03 · Guidance</span>
+        <h2>Guidance track record, FY2022–FY2025</h2>
+      </div>
+      <p class="body">Each year’s first guidance is the budget, each revision the reforecast, the published result the actual. 61 guidance statements tracked over five cycles, each checked word for word.</p>
+    </div>
+    <div class="prow">
+      <div class="card sqcard">
+        <span class="label sm">Annual targets 2022–2025 · beaten 8 · in line 3 · missed 0</span>
+        <div class="squares" role="img" aria-label="11 annual targets: 8 beaten, 3 in line, none missed"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="m"></i><i class="m"></i><i class="m"></i></div>
+        <div class="legend"><span><i style="background:var(--ink)"></i>Beaten</span><span><i style="background:var(--silver)"></i>In line (±1% of sales, ±0.5 pp of margin)</span></div>
+      </div>
+      <div class="card stat"><span class="label sm">Revisions 2022–2025</span><b>18 : 2</b><span>Raised to lowered. The first cut to a sales target came in August 2026.</span></div>
+      <div class="card stat"><span class="label sm">Largest beat</span><b>+23.4%</b><span>FY2022 net sales vs the initial target.</span></div>
+    </div>
+    <p class="src-note">Sources: On results releases and presentations, Q3 2021 to Q2 2026, and the Investor Day releases of 2023 and 2026. Adjusted EBITDA margin is the exception: within 0.5 pp of target until FY2024, because the gross margin surplus is reinvested.</p>
+  </section>
+
+  <section id="outlook" class="screen reveal">
+    <div class="txt">
+      <span class="label">04 · Outlook</span>
+      <h2>Outlook to 2029: three scenarios</h2>
+      <p class="body" id="scen-text" aria-live="polite">My one disagreement with management is on costs. I trust the sales and gross margin targets, beaten every year, and half of the cost target. Result: 20.9% in 2029.</p>
+      <div class="scen" role="group" aria-label="Scenario">
+        <button type="button" id="sc-mgmt" data-s="mgmt" aria-pressed="false">Management</button>
+        <button type="button" id="sc-base" data-s="base" aria-pressed="true">My central case</button>
+        <button type="button" id="sc-prudent" data-s="prudent" aria-pressed="false">Prudent</button>
+      </div>
+      <p class="src-note">At the 22 September 2026 price, On traded at 14.4x EV/EBIT, the same as Asics (Deckers 7.5x), and its enterprise value was 8.3 times my 2029 EBIT. This is not a price target or investment advice.</p>
+    </div>
+    <figure class="card" role="img" id="scen-fig" aria-label="My central case, adjusted EBITDA margin 2025 to 2029: 18.8, 19.75, 20.1, 20.5, 20.9">
+      <div class="big-last"><span class="label sm">Adj. EBITDA margin, %</span><div><b id="scen-last">20.9%</b><span class="label sm">in 2029</span></div></div>
+      <div class="vbars" id="vbars"></div>
+      <div class="vlab label sm"><span>2025 A</span><span>2026 G</span><span>2027 E</span><span>2028 E</span><span>2029 E</span></div>
+      <figcaption>A actual · G guidance mid-point (prudent: low end) · E my estimate at constant FX · model, tab Forecast</figcaption>
+    </figure>
+  </section>
+
+  <section id="work" class="work reveal">
+    <span class="label" style="padding-bottom:18px">The work</span>
+    <div class="wrow"><div><h3>The note</h3><span class="muted">10 pages in the format of an equity research report, one-page summary first.</span></div><div class="acts"><a class="btn dark" href="note.html">Read online</a><a class="btn line" href="files/On_Holding_Financial_Analysis_note_Guilhem_Bernard.pdf" download data-dl="note" id="dl-note">Download PDF</a></div></div>
+    <div class="wrow"><div><h3>The deck</h3><span class="muted">12 slides. View them here, or download them as PDF or PowerPoint.</span></div><div class="acts"><a class="btn dark" href="deck.html">View the deck</a><a class="btn line" href="files/On_Holding_Financial_Analysis_deck_Guilhem_Bernard.pdf" download data-dl="deckpdf" id="dl-deckpdf">PDF</a><a class="btn line" href="files/On_Holding_Financial_Analysis_deck_Guilhem_Bernard.pptx" download data-dl="deckpptx" id="dl-deckpptx">PowerPoint</a></div></div>
+    <div class="wrow"><div><h3>The model</h3><span class="muted">Excel. Three statements FY2022–FY2025, every line sourced to a page, ratios, guidance tracking, risks, forecasts, 210 automated checks.</span></div><div class="acts"><a class="btn dark" href="files/On_Holding_Financial_Model.xlsx" download data-dl="model" id="dl-model">Download the model</a></div></div>
+    <p class="status" id="status-work" aria-live="polite"></p>
+  </section>
+
+  <section id="method" class="method reveal">
+    <div class="top">
+      <div>
+        <span class="label lime">Method</span>
+        <h2>Made with AI</h2>
+        <p style="font-size:19px;line-height:1.5;color:rgba(255,255,255,.86);max-width:62ch">I built this project to learn. I am aiming for corporate finance, management control or audit, and I wanted to face what that work really involves, on a real company and its real filings. I also wanted to learn how AI can be used in finance, and where it still needs a human to check it.</p>
+      </div>
+      <div class="nums">
+        <div><b>210</b><span>automated checks</span></div>
+        <div><b>61</b><span>guidance statements checked word for word</span></div>
+      </div>
+    </div>
+    <div class="cols">
+      <div><span class="label sm">What I did</span><p>I structured the project and set its goals, then made the calls: the company, the angle, the method, the credibility verdict, the scenarios and the prognosis. I steered the AI towards what I wanted, questioned its answers, directed the design and reviewed every text.</p></div>
+      <div><span class="label sm">What Claude did</span><p>Claude (Anthropic) proposed the plan, collected the data from the filings, built the model, the note, the deck and this page, and helped me interpret the results. It also acted as a tutor: it explained what I had not yet covered in class and pointed me to methods I did not know.</p></div>
+      <div><span class="label sm">An AI error the checks caught</span><p>A draft said On had outgrown Asics “over four years”. The data showed it only for 2024 and 2025; in H1 2026 Asics grew almost as fast. Corrected, the finding became part of the valuation argument.</p></div>
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <div class="about-card">
+      <span class="gb">GB</span>
+      <div class="who">
+        <span class="label">About</span>
+        <h2>Guilhem Bernard</h2>
+        <p>Third-year student at IÉSEG School of Management, Paris.</p>
+      </div>
+      <div class="contacts">
+        <a class="contact-btn primary" href="https://www.linkedin.com/in/guilhem-bernard2006/" target="_blank" rel="noopener"><span class="label">Profile</span><b>LinkedIn <span aria-hidden="true">&rarr;</span></b></a>
+        <a class="contact-btn" href="mailto:guilhem.bernard@ieseg.fr"><span class="label">guilhem.bernard@ieseg.fr</span><b>Email <span aria-hidden="true">&rarr;</span></b></a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Guilhem Bernard · <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" rel="noopener license">CC BY-NC-ND 4.0</a></span>
+    <span>Independent student analysis, not investment advice. The author holds no position in On, Deckers or Asics. Not affiliated with On Holding AG. Published by Guilhem Bernard; hosted by GitHub Pages (GitHub, Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA).</span>
+  </footer>
+</main>
+
+<script>
+(function(){
+  var data = {
+    mgmt:{label:'Management', v:['18.8','19.75','20.5','21.3','22.0'], text:'Management takes the margin to 22.0% by 2029, with SG&A falling from 51.5% to 49.3% of sales.'},
+    base:{label:'My central case', v:['18.8','19.75','20.1','20.5','20.9'], text:'My one disagreement with management is on costs. I believe the sales and gross margin targets, beaten every year, and give half credit to the SG&A leverage. Result: 20.9% in 2029.'},
+    prudent:{label:'Prudent', v:['18.8','19.5','19.0','18.5','18.5'], text:'Growth slows the way HOKA’s did, gross margin gives up a point and SG&A stays flat. The margin ends below 2025.'}
+  };
+  var bars = document.getElementById('vbars');
+  bars.innerHTML = '';
+  var cols = [];
+  for (var i = 0; i < 5; i++) {
+    var c = document.createElement('div');
+    c.className = 'vb' + (i === 0 ? ' a' : '') + (i === 4 ? ' last' : '');
+    var s = document.createElement('span'); var d = document.createElement('div');
+    c.appendChild(s); c.appendChild(d); bars.appendChild(c); cols.push([s, d]);
+  }
+  function show(k){
+    var cur = data[k];
+    cur.v.forEach(function(v, i){ cols[i][0].textContent = v; cols[i][1].style.height = Math.round(parseFloat(v) / 24 * 190) + 'px'; });
+    document.getElementById('scen-last').textContent = cur.v[4] + '%';
+    document.getElementById('scen-text').textContent = cur.text;
+    document.getElementById('scen-fig').setAttribute('aria-label', cur.label + ', adjusted EBITDA margin 2025 to 2029: ' + cur.v.join(', '));
+    document.querySelectorAll('.scen button').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-s') === k ? 'true' : 'false'); });
+  }
+  document.querySelectorAll('.scen button').forEach(function(b){ b.addEventListener('click', function(){ show(b.getAttribute('data-s')); }); });
+  show('base');
+
+  var b64 = {model:'files/model.xlsx.b64.txt', deckpptx:'files/deck.pptx.b64.txt'};
+  var inViewer = !!(window.claude && window.claude.use);
+  if (!inViewer) return; /* on a normal web host the links download the files directly */
+  var dl = null;
+  window.claude.use('downloads').then(function(ns){ dl = ns; });
+  function say(btn, msg){ var st = btn.closest('.work') ? 'status-work' : 'status-hero'; document.getElementById(st).textContent = msg; }
+  document.querySelectorAll('[data-dl]').forEach(function(btn){
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      var key = btn.getAttribute('data-dl'), href = btn.getAttribute('href');
+      var name = href.split('/').pop();
+      if (!dl) { say(btn, 'Downloads are not available in this view.'); return; }
+      say(btn, 'Preparing the file…');
+      var src = b64[key] || href;
+      fetch(src).then(function(r){ if (!r.ok) throw new Error('missing'); return b64[key] ? r.text().then(function(t){ var bin = atob(t.trim()), u = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return new Blob([u]); }) : r.blob(); })
+        .then(function(blob){ return dl.save({filename:name, data:blob}); })
+        .then(function(){ say(btn, 'Saved.'); })
+        .catch(function(err){ say(btn, err && err.code === 'declined' ? 'Download cancelled.' : 'The file could not be saved here.'); });
+    });
+  });
+})();
+</script>
+</body></html>
